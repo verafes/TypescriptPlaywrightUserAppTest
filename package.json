@@ -9,9 +9,11 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.49.1",
-    "@types/node": "^22.10.7"
+    "@types/node": "^22.10.7",
+    "monocart-reporter": "^2.9.13"
   },
   "dependencies": {
+    "@estruyf/github-actions-reporter": "^1.9.2",
     "dotenv": "^16.4.7"
   }
 }
