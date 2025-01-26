@@ -8,12 +8,14 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.50.0",
     "@types/node": "^22.10.7",
+    "allure-playwright": "^3.0.9",
     "monocart-reporter": "^2.9.13"
   },
   "dependencies": {
     "@estruyf/github-actions-reporter": "^1.9.2",
+    "allure-js-commons": "^3.0.9",
     "dotenv": "^16.4.7"
   }
 }
