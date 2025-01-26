@@ -5,6 +5,13 @@ on:
   pull_request:
     branches: [ main ]
 
+  permissions:
+    contents: write
+    pages: write
+    id-token: write
+    actions: read
+    checks: write
+
 jobs:
   test:
     name: 'Run Tests'
