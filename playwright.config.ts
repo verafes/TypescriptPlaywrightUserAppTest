@@ -41,7 +41,7 @@ export default defineConfig({
     [
       "allure-playwright",
       {
-        resultsDir: "reports/allure-results",
+        resultsDir: "reports/allure-report",
         detail: true,
         suiteTitle: true,
         links: {
