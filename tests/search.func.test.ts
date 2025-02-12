@@ -1,9 +1,8 @@
 import { test, expect, request, APIRequestContext} from "@playwright/test";
-import * as preconditions from "../utils/preconditions/preconditions";
+import * as preconditions from "@preconditions/preconditions";
+import * as usersData from "@data/users.data";
 import { HomePage } from "../pages/home.page";
 import { SearchPage } from "../pages/search.page";
-import { users } from "../testData/users.data";
-import * as usersData from "../testData/users.data"
 
 test.describe('Should Search Users By Search Criteria', async () => {
     let apiRequest: APIRequestContext;
@@ -16,19 +15,19 @@ test.describe('Should Search Users By Search Criteria', async () => {
         await page.goto('/');
     })
 
-    // test('Search User With Unique First Name', async({ page }) => {
-    //     const userJohn = users[0];
-    //     await new HomePage(page).clickSearchTab();
-    //
-    //     const searchPage = new SearchPage(page);
-    //     await searchPage.inputFirstName(userJohn.firstName);
-    //
-    //     await searchPage.clickSearchButton();
-    //
-    //     expect(await searchPage.getTbodyRowCounts()).toBe(1);
-    // })
+    test('Search User With Unique First Name POM', async({ page }) => {
+        const userJohn = usersData.users[0];
+        await new HomePage(page).clickSearchTab();
 
-    test('Search User With Unique First Name', async({ page }) => {
+        const searchPage = new SearchPage(page);
+        await searchPage.inputFirstName(userJohn.firstName);
+
+        await searchPage.clickSearchButton();
+
+        expect(await searchPage.getTbodyRowCounts()).toBe(1);
+    })
+
+    test('Search User With Unique First Name new', async({ page }) => {
         const userWithUniqueFirstName = usersData.users[0];
 
         const searchTab = page.getByRole('link', {name: 'Search', exact: true});
