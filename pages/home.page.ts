@@ -10,6 +10,7 @@ export class HomePage {
     }
 
     async clickSearchTab() {
+        await this.searchTab.hover();
         await this.searchTab.click();
         await this.page.waitForLoadState('networkidle');
     }

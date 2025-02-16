@@ -1,4 +1,4 @@
-import { Page, Locator } from "@playwright/test"
+import {Page, Locator, expect} from "@playwright/test"
 
 
 export class SearchPage {
@@ -11,7 +11,6 @@ export class SearchPage {
         this.page = page;
         this.firstNamePlaceholder = page.getByPlaceholder("Enter first name...");
         this.searchButton = page.getByRole("button", {name: "Search", exact: true})
-        // this.searchButton = page.locator("#searchButton");
         this.tableRow = page.locator('table > tbody > tr');
     }
 
@@ -20,11 +19,12 @@ export class SearchPage {
     }
 
     async clickSearchButton() {
+        await this.page.waitForLoadState('networkidle');
         await this.searchButton.click();
     }
 
     async getTbodyRowCounts() {
-        await this.page.waitForTimeout(2000);
+        await expect(this.searchButton).toBeDisabled();
 
         return await this.tableRow.count();
     }

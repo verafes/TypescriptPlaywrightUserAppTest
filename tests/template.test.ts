@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from "@playwright/test"
+import * as usersData from "../data/users.data"
 
 test.describe('Tests Suite Name', async() => {
 
