@@ -1,0 +1,3 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"","","","1","0","7","0","0"
+"SRV: Server Availability and Homepage Load.","","SRV-LOAD: Verify API responds successfully upon navigation.","0","0","2","0","0"
