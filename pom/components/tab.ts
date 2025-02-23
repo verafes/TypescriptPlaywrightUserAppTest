@@ -1,8 +1,8 @@
 import { Page, Locator } from "@playwright/test"
 
-export class HomePage {
+export class Tab {
     private readonly page: Page;
-    private readonly searchTab: Locator
+    private readonly searchTab: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -10,8 +10,11 @@ export class HomePage {
     }
 
     async clickSearchTab() {
-        await this.searchTab.hover();
-        await this.searchTab.click();
-        await this.page.waitForLoadState('networkidle');
+        await Promise.all([
+            this.searchTab.isEnabled(),
+            this.searchTab.hover(),
+            this.searchTab.click(),
+        ])
+
     }
 }

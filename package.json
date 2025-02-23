@@ -2,7 +2,13 @@
   "name": "typescriptplaywrightuserapptest",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npm run clean && npx playwright test",
+    "test-only": "npx playwright test",
+    "report:html": "npx playwright show-report reports/html-report",
+    "report:allure": "allure serve reports/allure-report",
+    "clean": "rm -rf playwright-report test-results"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
