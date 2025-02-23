@@ -1,8 +1,8 @@
 import { test, expect, request, APIRequestContext} from "@playwright/test";
 import * as preconditions from "@preconditions/preconditions";
 import * as usersData from "@data/users.data";
-import { HomePage } from "../pages/home.page";
-import { SearchPage } from "../pages/search.page";
+import { HomePage } from "@pages/home.page";
+import { SearchPage } from "@pages/search.page";
 
 test.describe('Should Search Users By Search Criteria', async () => {
     let apiRequest: APIRequestContext;
@@ -16,18 +16,28 @@ test.describe('Should Search Users By Search Criteria', async () => {
     })
 
     test('Search User With Unique First Name POM', async({ page }) => {
-        const userJohn = usersData.users[0];
-        await new HomePage(page).clickSearchTab();
+        const userWithUniqueFirstName = usersData.uniqueFirstNameUser;
+        const expectedFirstName = usersData.uniqueFirstNameUser.firstName;
+        const expectedLastName = usersData.uniqueFirstNameUser.lastName;
+        const expectedAge = usersData.uniqueFirstNameUser.age.toString();
+        let actualUserInfo: string[];
+
+        await new HomePage(page).tab.clickSearchTab();
 
         const searchPage = new SearchPage(page);
-        await searchPage.inputFirstName(userJohn.firstName);
+        await searchPage.form.inputFirstName(userWithUniqueFirstName.firstName);
+        await searchPage.form.clickSearchButton();
 
-        await searchPage.clickSearchButton();
+        actualUserInfo = await searchPage.table.getFirstResultInfo();
 
-        expect(await searchPage.getTbodyRowCounts()).toBe(1);
+        expect(await searchPage.table.tableRow).toHaveCount(1);
+
+        expect(actualUserInfo[1]).toStrictEqual(expectedFirstName);
+        expect(actualUserInfo[2]).toStrictEqual(expectedLastName);
+        expect(actualUserInfo[3]).toStrictEqual(expectedAge);
     })
 
-    test('Search User With Unique First Name new', async({ page }) => {
+    test('Search User With Unique First Name (no POM)', async({ page }) => {
         const userWithUniqueFirstName = usersData.users[0];
 
         const searchTab = page.getByRole('link', {name: 'Search', exact: true});
