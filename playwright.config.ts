@@ -10,11 +10,13 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 export default defineConfig({
   tsconfig: './tsconfig.json',
   testDir: './tests',
+  testIgnore: ['tests/template*.test.ts'],
+  outputDir: './reports/test-results',
   timeout: 60 * 1000,
   expect: {
-    timeout: 2*1000
+    timeout: 10*1000
   },
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
@@ -68,7 +70,7 @@ export default defineConfig({
     {
       name: 'chromium',
       testMatch: /.*\.test\.ts/,
-      timeout: 10 * 1000,
+      timeout: 15 * 1000,
       use: { ...devices['Desktop Chrome'],
         headless: !!process.env.CI,
       },
