@@ -37,38 +37,6 @@ test.describe('Should Search Users By Search Criteria', async () => {
         expect(actualUserInfo[3]).toStrictEqual(expectedAge);
     })
 
-    test('Search User With Unique First Name (no POM)', async({ page }) => {
-        const userWithUniqueFirstName = usersData.users[0];
-
-        const searchTab = page.getByRole('link', {name: 'Search', exact: true});
-        const tableRow = page.locator("tbody>tr");
-        const firstNamePlaceholder = page.getByPlaceholder('Enter first name...');
-        const searchButton = page.getByRole('button', {name: 'Search', exact: true});
-
-        await expect(searchTab).toBeEnabled();
-        await searchTab.hover();
-        await searchTab.click();
-
-        await expect(tableRow.first()).toBeAttached();
-        await expect(searchButton).toBeDisabled();
-
-        await firstNamePlaceholder.fill(userWithUniqueFirstName.firstName);
-
-        await expect (searchButton).toBeEnabled();
-        await searchButton.click();
-
-        await expect(tableRow).toHaveCount(1);
-
-        await tableRow.first().hover();
-        await expect(tableRow.first()).toBeVisible();
-
-        const actualUserInfo = await tableRow.first().innerText().then(text => text.split("\t"));
-
-        expect(actualUserInfo[1]).toStrictEqual(userWithUniqueFirstName.firstName);
-        expect(actualUserInfo[2]).toStrictEqual(userWithUniqueFirstName.lastName);
-        expect(actualUserInfo[3]).toStrictEqual(userWithUniqueFirstName.age.toString());
-    })
-
     test.afterEach('Close API request context', async () => {
         await apiRequest.dispose();
     })

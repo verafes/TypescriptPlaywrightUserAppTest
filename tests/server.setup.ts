@@ -15,17 +15,12 @@ test.beforeAll('Setup Playwright environment', async() => {
 })
 
 test.describe('Verify the server is responsive', async() => {
-    {
-    //     await allure.epic('SRV: Server Availability and Homepage Load.');
-    //     await allure.story('SRV-LOAD: Verify API responds successfully upon navigation.');
-    //     await allure.tags('SRV', 'SRV-LOAD', '/api/');
-    }
 
     test.beforeEach('Create new Context and new Page', async() => {
         {
-                await allure.epic('SRV: Server Availability and Homepage Load.');
-                await allure.story('SRV-LOAD: Verify API responds successfully upon navigation.');
-                await allure.tags('SRV', 'SRV-LOAD', '/api/');
+            await allure.epic('SRV: Server Availability and Homepage Load.');
+            await allure.story('SRV-LOAD: Verify API responds successfully upon navigation.');
+            await allure.tags('SRV', 'SRV-LOAD', '/api/');
             await allure.severity(Severity.BLOCKER);
         }
 
